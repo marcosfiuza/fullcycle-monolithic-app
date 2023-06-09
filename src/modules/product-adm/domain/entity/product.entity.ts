@@ -2,7 +2,7 @@ import AggregateRootInterface from "../../../@shared/domain/entity/aggregate-roo
 import BaseEntity from "../../../@shared/domain/entity/base.entity";
 import Id from "../../../@shared/domain/value-object/id.value-object";
 
-export type ProductEntityProps = {
+export type ProductProps = {
     id?: Id;
     name: string;
     description: string;
@@ -12,13 +12,13 @@ export type ProductEntityProps = {
     updatedAt?: Date;
 }
 
-export default class ProductEntity extends BaseEntity implements AggregateRootInterface {
+export default class Product extends BaseEntity implements AggregateRootInterface {
     private _name: string;
     private _description: string;
     private _purchasePrice: number;
     private _stock: number;
 
-    constructor(props: ProductEntityProps) {
+    constructor(props: ProductProps) {
         super(props.id, props.createdAt, props.updatedAt);
 
         this._name = props.name;

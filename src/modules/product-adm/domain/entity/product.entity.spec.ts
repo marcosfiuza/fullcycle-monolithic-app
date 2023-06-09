@@ -1,66 +1,66 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
-import ProductEntity, { ProductEntityProps } from "./product.entity";
+import Product, { ProductProps } from "./product.entity";
 
-const productEntityProps: ProductEntityProps = {
+const productProps: ProductProps = {
     id: new Id("p1"),
     name: "Product 1",
     description: "Description",
     purchasePrice: 100,
     stock: 40,
-    createdAt: new Date("2023-06-09 00:00:00"),
-    updatedAt: new Date("2023-06-09 06:00:00")
+    createdAt: new Date(),
+    updatedAt: new Date()
 };
 
 describe("Unit test for product entity on product-adm module", () => {
     it("should instantiate a product entity", () => {
-        const productEntity = new ProductEntity(productEntityProps);
+        const product = new Product(productProps);
 
-        expect(productEntity.id).toEqual(productEntityProps.id);
-        expect(productEntity.name).toEqual(productEntityProps.name);
-        expect(productEntity.description).toEqual(productEntityProps.description);
-        expect(productEntity.purchasePrice).toEqual(productEntityProps.purchasePrice);
-        expect(productEntity.stock).toEqual(productEntityProps.stock);
-        expect(productEntity.createdAt).toEqual(productEntityProps.createdAt);
-        expect(productEntity.updatedAt).toEqual(productEntityProps.updatedAt);
+        expect(product.id).toEqual(productProps.id);
+        expect(product.name).toEqual(productProps.name);
+        expect(product.description).toEqual(productProps.description);
+        expect(product.purchasePrice).toEqual(productProps.purchasePrice);
+        expect(product.stock).toEqual(productProps.stock);
+        expect(product.createdAt).toEqual(productProps.createdAt);
+        expect(product.updatedAt).toEqual(productProps.updatedAt);
     })
 
     it("should change a product entity name", () => {
-        const productEntity = new ProductEntity(productEntityProps);
+        const product = new Product(productProps);
 
-        expect(productEntity.name).toEqual(productEntityProps.name);
+        expect(product.name).toEqual(productProps.name);
 
-        productEntity.name = "Product 2";
+        product.name = "Product 2";
 
-        expect(productEntity.name).toEqual("Product 2");
+        expect(product.name).toEqual("Product 2");
     })
 
     it("should change a product entity description", () => {
-        const productEntity = new ProductEntity(productEntityProps);
+        const product = new Product(productProps);
 
-        expect(productEntity.description).toEqual(productEntityProps.description);
+        expect(product.description).toEqual(productProps.description);
 
-        productEntity.description = "New description";
+        product.description = "New description";
 
-        expect(productEntity.description).toEqual("New description");
+        expect(product.description).toEqual("New description");
     })
 
     it("should change a product entity purchase price", () => {
-        const productEntity = new ProductEntity(productEntityProps);
+        const product = new Product(productProps);
 
-        expect(productEntity.purchasePrice).toEqual(productEntityProps.purchasePrice);
+        expect(product.purchasePrice).toEqual(productProps.purchasePrice);
 
-        productEntity.purchasePrice = 200;
+        product.purchasePrice = 200;
 
-        expect(productEntity.purchasePrice).toEqual(200);
+        expect(product.purchasePrice).toEqual(200);
     })
 
     it("should change a product entity stock", () => {
-        const productEntity = new ProductEntity(productEntityProps);
+        const product = new Product(productProps);
 
-        expect(productEntity.stock).toEqual(productEntityProps.stock);
+        expect(product.stock).toEqual(productProps.stock);
 
-        productEntity.stock = 5;
+        product.stock = 5;
 
-        expect(productEntity.stock).toEqual(5);
+        expect(product.stock).toEqual(5);
     })
 })

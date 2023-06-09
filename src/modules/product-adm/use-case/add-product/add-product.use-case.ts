@@ -1,4 +1,4 @@
-import ProductEntity, { ProductEntityProps } from "../../domain/entity/product.entity";
+import Product, { ProductProps } from "../../domain/entity/product.entity";
 import ProductGatewayInterface from "../../gateway/product.gateway.interface";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
 
@@ -10,14 +10,14 @@ export default class AddProductUseCase {
     }
 
     async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
-        const props: ProductEntityProps = {
+        const props: ProductProps = {
             name: input.name,
             description: input.description,
             purchasePrice: input.purchasePrice,
             stock: input.stock
         };
 
-        const product = new ProductEntity(props);
+        const product = new Product(props);
 
         this._productRepository.add(product);
 

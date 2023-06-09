@@ -1,6 +1,6 @@
-import ProductEntity from "../domain/entity/product.entity";
+import Product from "../domain/entity/product.entity";
 
 export default interface ProductGatewayInterface {
-    add(product: ProductEntity): Promise<void>;
-    find(id: string): Promise<ProductEntity>;
+    add(product: Product): Promise<void>;
+    find(id: string): Promise<Product>;
 }
