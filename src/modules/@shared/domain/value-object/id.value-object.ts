@@ -8,10 +8,6 @@ export default class Id implements ValueObjectInterface {
         this._id = id || uuidv4();
     }
 
-    get id(): string {
-        return this._id;
-    }
-
     toString(): string {
         return this._id;
     }
