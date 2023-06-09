@@ -5,10 +5,10 @@ export default class BaseEntity {
     private _createdAt: Date;
     private _updatedAt: Date;
 
-    constructor(id?: Id) {
+    constructor(id?: Id, createdAt?: Date, updatedAt?: Date) {
         this._id = id || new Id();
-        this._createdAt = new Date();
-        this._updatedAt = new Date();
+        this._createdAt = createdAt || new Date();
+        this._updatedAt = updatedAt || new Date();
     }
 
     get id(): Id {
@@ -21,13 +21,5 @@ export default class BaseEntity {
 
     get updatedAt(): Date {
         return this._updatedAt;
-    }
-
-    set createdAt(createdAt: Date) {
-        this._createdAt = createdAt;
-    }
-
-    set updatedAt(updatedAt: Date) {
-        this._updatedAt = updatedAt;
     }
 }
