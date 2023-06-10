@@ -4,6 +4,7 @@ import ProductRepository from "../repository/sequelize/product.repository";
 import AddProductUseCase from "../use-case/add-product/add-product.use-case";
 import ProductAdmFacade from "./product-adm.facade";
 import { AddProductFacadeInputDto } from "./add-product.facade.dto";
+import ProductAdmFacadeFactory from "../factory/facade.factory";
 
 describe("Product adm facade test", (() => {
     let sequelize: Sequelize;
@@ -26,12 +27,7 @@ describe("Product adm facade test", (() => {
     })
 
     it("should create a product", async () => {
-        const productRepository = new ProductRepository();
-        const addProductUseCase = new AddProductUseCase(productRepository);
-        const productAdmFacade = new ProductAdmFacade({
-            addProductUseCase: addProductUseCase,
-            checkStockUseCase: undefined
-        });
+        const productAdmFacade = ProductAdmFacadeFactory.create();
 
         const input: AddProductFacadeInputDto = {
             name: "Product 1",
