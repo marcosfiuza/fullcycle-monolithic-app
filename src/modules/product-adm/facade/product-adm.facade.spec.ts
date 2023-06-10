@@ -5,6 +5,7 @@ import AddProductUseCase from "../use-case/add-product/add-product.use-case";
 import ProductAdmFacade from "./product-adm.facade";
 import { AddProductFacadeInputDto } from "./add-product.facade.dto";
 import ProductAdmFacadeFactory from "../factory/facade.factory";
+import { CheckStockFacadeInputDto } from "./check-stock.facade.dto";
 
 describe("Product adm facade test", (() => {
     let sequelize: Sequelize;
@@ -50,6 +51,29 @@ describe("Product adm facade test", (() => {
             stock: input.stock,
             createdAt: expect.any(Date),
             updatedAt: expect.any(Date)
+        });
+    })
+
+    it("should get stock of a product", async () => {
+        const productAdmFacade = ProductAdmFacadeFactory.create();
+
+        const product = await productAdmFacade.addProduct({
+            id: "p1",
+            name: "Product 1",
+            description: "Description",
+            purchasePrice: 100,
+            stock: 40
+        });
+
+        const input: CheckStockFacadeInputDto = {
+            id: "p1"
+        };
+
+        const output = await productAdmFacade.checkStock(input);
+
+        expect(output).toStrictEqual({
+            id: "p1",
+            stock: 40
         });
     })
 }))
