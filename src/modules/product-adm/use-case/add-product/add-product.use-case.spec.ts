@@ -6,7 +6,7 @@ const MockProductRepository = () => ({
     find: jest.fn()
 });
 
-describe("Unit test for add product use case on product-adm module", () => {
+describe("Add product use case test", () => {
     it("should add a product", async () => {
         const productRepository = MockProductRepository();
         const addProductUseCase = new AddProductUseCase(productRepository);

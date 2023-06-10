@@ -11,7 +11,7 @@ const productProps: ProductProps = {
     updatedAt: new Date()
 };
 
-describe("Unit test for product entity on product-adm module", () => {
+describe("Product entity test", () => {
     it("should instantiate a product entity", () => {
         const product = new Product(productProps);
 

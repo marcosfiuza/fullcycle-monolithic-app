@@ -1,7 +1,7 @@
 import Id from "../value-object/id.value-object";
 import BaseEntity from "./base.entity"
 
-describe("Unit test for base entity", () => {
+describe("Base entity test", () => {
     it("should instantiate a base entity", () => {
         const baseEntity = new BaseEntity();
 
