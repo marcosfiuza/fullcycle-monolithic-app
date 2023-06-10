@@ -1,3 +1,4 @@
+import Id from "../../../@shared/domain/value-object/id.value-object";
 import UseCaseInterface from "../../../@shared/use-case/use-case.interface";
 import Product, { ProductProps } from "../../domain/entity/product.entity";
 import ProductGatewayInterface from "../../gateway/product.gateway.interface";
@@ -12,6 +13,7 @@ export default class AddProductUseCase implements UseCaseInterface {
 
     async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
         const props: ProductProps = {
+            id: new Id(input.id),
             name: input.name,
             description: input.description,
             purchasePrice: input.purchasePrice,
