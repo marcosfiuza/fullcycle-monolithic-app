@@ -1,8 +1,9 @@
+import UseCaseInterface from "../../../@shared/use-case/use-case.interface";
 import Product, { ProductProps } from "../../domain/entity/product.entity";
 import ProductGatewayInterface from "../../gateway/product.gateway.interface";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
 
-export default class AddProductUseCase {
+export default class AddProductUseCase implements UseCaseInterface {
     private _productRepository: ProductGatewayInterface;
 
     constructor(productRepository: ProductGatewayInterface) {
