@@ -1,0 +1,26 @@
+import Id from "../../../@shared/domain/value-object/id.value-object";
+import UseCaseInterface from "../../../@shared/use-case/use-case.interface";
+import Product, { ProductProps } from "../../domain/entity/product.entity";
+import ProductGatewayInterface from "../../gateway/product.gateway.interface";
+import { FindAllProductsOutputDto } from "./find-all-products.dto";
+
+export default class FindAllProductsUseCase implements UseCaseInterface {
+    private _productRepository: ProductGatewayInterface;
+
+    constructor(productRepository: ProductGatewayInterface) {
+        this._productRepository = productRepository;
+    }
+
+    async execute(): Promise<FindAllProductsOutputDto[]> {
+        const results = await this._productRepository.findAll();
+
+        const output: FindAllProductsOutputDto[] = results.map(product => ({
+            id: product.id.toString(),
+            name: product.name,
+            description: product.description,
+            salesPrice: product.salesPrice
+        }));
+
+        return output;
+    }
+}
