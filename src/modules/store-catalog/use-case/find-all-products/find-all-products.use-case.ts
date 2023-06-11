@@ -1,6 +1,4 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
 import UseCaseInterface from "../../../@shared/use-case/use-case.interface";
-import Product, { ProductProps } from "../../domain/entity/product.entity";
 import ProductGatewayInterface from "../../gateway/product.gateway.interface";
 import { FindAllProductsOutputDto } from "./find-all-products.dto";
 

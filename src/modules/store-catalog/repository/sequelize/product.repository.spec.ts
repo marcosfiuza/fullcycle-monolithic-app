@@ -53,4 +53,36 @@ describe("Product sequelize repository test", () => {
 
         expect(produtcs).toMatchObject([product1Values, product2Values]);
     })
+
+    it("should find a product", async () => {
+        const productRepository = new ProductRepository();
+
+        const productValues = {
+            id: "p1",
+            name: "Product 1",
+            description: "Description",
+            salesPrice: 100
+        };
+
+        await ProductModel.create(productValues);
+
+        const result = await productRepository.find(productValues.id);
+
+        const product = {
+            id: result.id.toString(),
+            name: result.name,
+            description: result.description,
+            salesPrice: result.salesPrice
+        };
+
+        expect(product).toStrictEqual(productValues);
+    })
+
+    it("should not find a product", async () => {
+        const productRepository = new ProductRepository();
+
+        expect(async () => {
+            await productRepository.find("ABCDE");
+        }).rejects.toThrow("Product not found");
+    })
 })
