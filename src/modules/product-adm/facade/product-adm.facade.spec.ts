@@ -1,10 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import ProductModel from "../repository/sequelize/product.model";
-import ProductRepository from "../repository/sequelize/product.repository";
-import AddProductUseCase from "../use-case/add-product/add-product.use-case";
-import ProductAdmFacade from "./product-adm.facade";
-import { AddProductFacadeInputDto } from "./add-product.facade.dto";
 import ProductAdmFacadeFactory from "../factory/facade.factory";
+import { AddProductFacadeInputDto } from "./add-product.facade.dto";
 import { CheckStockFacadeInputDto } from "./check-stock.facade.dto";
 
 describe("Product adm facade test", (() => {
