@@ -1,13 +1,14 @@
 import AggregateRootInterface from "../../../@shared/domain/entity/aggregate-root.interface";
 import BaseEntity from "../../../@shared/domain/entity/base.entity";
 import Id from "../../../@shared/domain/value-object/id.value-object";
+import Address from "../value-object/address";
 import Product from "./product.entity";
 
 export type InvoiceProps = {
     id?: Id;
     name: string;
     document: string;
-    address: string;
+    address: Address;
     items: Product[];
     createdAt?: Date;
     updatedAt?: Date;
@@ -16,7 +17,7 @@ export type InvoiceProps = {
 export default class Invoice extends BaseEntity implements AggregateRootInterface {
     private _name: string;
     private _document: string;
-    private _address: string;
+    private _address: Address;
     private _items: Product[];
 
     constructor(props: InvoiceProps) {
@@ -36,7 +37,7 @@ export default class Invoice extends BaseEntity implements AggregateRootInterfac
         return this._document;
     }
 
-    get address(): string {
+    get address(): Address {
         return this._address;
     }
 
@@ -52,11 +53,15 @@ export default class Invoice extends BaseEntity implements AggregateRootInterfac
         this._document = document;
     }
 
-    set address(address: string) {
+    set address(address: Address) {
         this._address = address;
     }
 
     set items(items: Product[]) {
         this._items = items;
+    }
+
+    calculateTotal(): number {
+        return this._items.reduce((total, item) => total + item.price, 0);
     }
 }

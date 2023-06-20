@@ -36,5 +36,4 @@ export default class Product extends BaseEntity implements AggregateRootInterfac
     set price(price: number) {
         this._price = price;
     }
-
 }

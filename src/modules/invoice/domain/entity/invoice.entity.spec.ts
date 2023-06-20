@@ -1,35 +1,48 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
+import Address from "../value-object/address";
+import Product from "./product.entity";
 import Invoice, { InvoiceProps } from "./invoice.entity";
-import Product, { ProductProps } from "./product.entity";
+
+const address = new Address({
+    street: "Street",
+    number: 1,
+    complement: "2nd floor",
+    city: "City",
+    state: "State",
+    zipcode: "00000"
+});
+
+const product1 = new Product({
+    id: new Id("p1"),
+    name: "Product 1",
+    price: 100
+});
+
+const product2 = new Product({
+    id: new Id("p2"),
+    name: "Product 2",
+    price: 200
+});
 
 const invoiceProps: InvoiceProps = {
     id: new Id("i1"),
     name: "Invoice 1",
     document: "Document",
-    address: "Street 1",
-    items: [],
+    address: address,
+    items: [product1, product2],
     createdAt: new Date(),
     updatedAt: new Date()
 };
 
-const productProps: ProductProps = {
-    id: new Id("p1"),
-    name: "Product 1",
-    price: 100
-};
-
 describe("Invoice entity test", () => {
     it("should instantiate an invoice", () => {
-        const product = new Product(productProps);
-        const invoice = new Invoice({ ...invoiceProps, items: [product] });
+        const invoice = new Invoice(invoiceProps);
 
         expect(invoice.id).toEqual(invoiceProps.id);
         expect(invoice.name).toEqual(invoiceProps.name);
         expect(invoice.document).toEqual(invoiceProps.document);
         expect(invoice.address).toEqual(invoiceProps.address);
-        expect(invoice.items[0].id).toEqual(productProps.id);
-        expect(invoice.items[0].name).toEqual(productProps.name);
-        expect(invoice.items[0].price).toEqual(productProps.price);
+        expect(invoice.items).toEqual(invoiceProps.items);
         expect(invoice.createdAt).toEqual(invoiceProps.createdAt);
         expect(invoice.updatedAt).toEqual(invoiceProps.updatedAt);
     })
@@ -59,20 +72,33 @@ describe("Invoice entity test", () => {
 
         expect(invoice.address).toEqual(invoiceProps.address);
 
-        invoice.address = "Street 2";
+        const newAddress = new Address({
+            street: "Avenue",
+            number: 2,
+            complement: "3rd floor",
+            city: "New city",
+            state: "New state",
+            zipcode: "00001"
+        });
 
-        expect(invoice.address).toEqual("Street 2");
+        invoice.address = newAddress;
+
+        expect(invoice.address).toEqual(newAddress);
     })
 
     it("should change an invoice items", () => {
         const invoice = new Invoice(invoiceProps);
 
-        expect(invoice.items).toEqual([]);
+        expect(invoice.items).toEqual(invoiceProps.items);
 
-        invoice.items = [new Product(productProps)];
+        invoice.items = [product1];
 
-        expect(invoice.items[0].id).toEqual(productProps.id);
-        expect(invoice.items[0].name).toEqual(productProps.name);
-        expect(invoice.items[0].price).toEqual(productProps.price);
+        expect(invoice.items).toEqual([product1]);
+    })
+
+    it("should calculate an invoice total", () => {
+        const invoice = new Invoice(invoiceProps);
+
+        expect(invoice.calculateTotal()).toEqual(300);
     })
 })
