@@ -1,5 +1,6 @@
 
 import Id from "../../../@shared/domain/value-object/id.value-object";
+import Address from "../value-object/address";
 import Client from "./client.entity";
 import Order, { OrderProps } from "./order.entity";
 import Product from "./product.entity";
@@ -10,7 +11,14 @@ const orderProps: OrderProps = {
         id: new Id("p1"),
         name: "Client 1",
         email: "client1@localhost.net",
-        address: "Street 1"
+        address: new Address({
+            street: "Street",
+            number: 1,
+            complement: "2nd floor",
+            city: "City",
+            state: "State",
+            zipcode: "00000"
+        })
     }),
     products: [
         new Product({
