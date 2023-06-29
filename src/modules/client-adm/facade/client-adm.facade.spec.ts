@@ -30,7 +30,12 @@ describe("Client adm facade test", (() => {
         const input: AddClientFacadeInputDto = {
             name: "Client 1",
             email: "client1@localhost.net",
-            address: "Street 1"
+            street: "Street",
+            number: 1,
+            complement: "2nd floor",
+            city: "City",
+            state: "State",
+            zipcode: "00000"
         };
 
         const output = await clientAdmFacade.addClient(input);
@@ -43,20 +48,30 @@ describe("Client adm facade test", (() => {
             id: expect.any(String),
             name: input.name,
             email: input.email,
-            address: input.address,
+            address_street: input.street,
+            address_number: input.number,
+            address_complement: input.complement,
+            address_city: input.city,
+            address_state: input.state,
+            address_zipcode: input.zipcode,
             createdAt: expect.any(Date),
             updatedAt: expect.any(Date)
         });
     })
 
     it("should find a client", async () => {
-        const storeCatalogFacade = ClientAdmFacadeFactory.create();
+        const clientAdmFacade = ClientAdmFacadeFactory.create();
 
         const clientValues = {
             id: "c1",
             name: "Client 1",
             email: "client1@localhost.net",
-            address: "Street 1",
+            address_street: "Street",
+            address_number: 1,
+            address_complement: "2nd floor",
+            address_city: "City",
+            address_state: "State",
+            address_zipcode: "00000",
             createdAt: new Date(),
             updatedAt: new Date()
         };
@@ -67,20 +82,32 @@ describe("Client adm facade test", (() => {
             id: clientValues.id
         };
 
-        const output = await storeCatalogFacade.findClient(input);
+        const output = await clientAdmFacade.findClient(input);
 
-        expect(output).toMatchObject(clientValues);
+        expect(output).toMatchObject({
+            id: clientValues.id,
+            name: clientValues.name,
+            email: clientValues.email,
+            street: clientValues.address_street,
+            number: clientValues.address_number,
+            complement: clientValues.address_complement,
+            city: clientValues.address_city,
+            state: clientValues.address_state,
+            zipcode: clientValues.address_zipcode,
+            createdAt: clientValues.createdAt,
+            updatedAt: clientValues.updatedAt
+        });
     })
 
     it("should not find a client", async () => {
-        const storeCatalogFacade = ClientAdmFacadeFactory.create();
+        const clientAdmFacade = ClientAdmFacadeFactory.create();
 
         expect(async () => {
             const input: FindClientFacadeInputDto = {
                 id: "ABCDE"
             };
 
-            await storeCatalogFacade.findClient(input);
+            await clientAdmFacade.findClient(input);
         }).rejects.toThrow("Client not found");
     })
 }))

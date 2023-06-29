@@ -14,7 +14,12 @@ describe("Add client use case test", () => {
         const input: AddClientInputDto = {
             name: "Client 1",
             email: "client1@localhost.net",
-            address: "Street 1"
+            street: "Street",
+            number: 1,
+            complement: "2nd floor",
+            city: "City",
+            state: "State",
+            zipcode: "00000"
         };
 
         const result = await addClientUseCase.execute(input);
